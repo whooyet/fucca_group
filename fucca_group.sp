@@ -12,13 +12,13 @@ public Plugin myinfo =
 	name = "Simple Fucca Group",
 	author = "뿌까",
 	description = "하하하하",
-	version = "1.2",
+	version = "1.3",
 	url = "x"
 };
 
 public OnPluginStart()
 {
-	Cvar_GroupID = CreateConVar("fucca_groupid", "31278663", "그룹 아이디");
+	Cvar_GroupID = CreateConVar("c", "31278663", "그룹 아이디");
 	HookConVarChange(Cvar_GroupID, ConVarChanged);
 	GetConVarString(Cvar_GroupID, g_groupid, sizeof(g_groupid));
 }
@@ -42,7 +42,7 @@ public Native_IsGroup(Handle:plugin, numParams)
 	return bIsInGroup[client];
 }
 
-public OnClientPutInServer(client)
+public OnClientPutInServer(client) 
 {
 	bIsInGroup[client] = false;
 	CreateTimer(5.0, abc, client);
@@ -52,11 +52,10 @@ public Action:abc(Handle:timer, any:client) Steam_RequestGroupStatus(client, Str
 
 public Steam_GroupStatusResult(client, groupID, bool:bIsMember, bool:bIsOfficer)
 {
-	if(!PlayerCheck) return;
+	if(!PlayerCheck(client)) return;
 	if(groupID != StringToInt(g_groupid)) return;
 	bIsInGroup[client] = bIsMember;
 }
-
 
 stock bool:PlayerCheck(Client){
 	if(Client > 0 && Client <= MaxClients){
