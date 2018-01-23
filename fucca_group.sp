@@ -18,7 +18,7 @@ public Plugin myinfo =
 
 public OnPluginStart()
 {
-	Cvar_GroupID = CreateConVar("c", "31278663", "그룹 아이디");
+	Cvar_GroupID = CreateConVar("fucca_groupid", "31278663", "그룹 아이디");
 	HookConVarChange(Cvar_GroupID, ConVarChanged);
 	GetConVarString(Cvar_GroupID, g_groupid, sizeof(g_groupid));
 }
